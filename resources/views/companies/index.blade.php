@@ -8,6 +8,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Logo</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Website</th>
@@ -18,6 +19,13 @@
                 @foreach ($companies as $company)
                     <tr>
                         <td>{{ $company->id }}</td>
+                        <td>
+                            @if ($company->logo)
+                                <img src="{{ $company->logo ? asset('storage/' . $company->logo) : asset('storage/logos/default.png') }}" alt="{{ $company->name }} Logo" class="img-thumbnail" style="height: 50px; width: auto;">
+                            @else
+                                <span>No Logo</span>
+                            @endif
+                        </td>
                         <td>{{ $company->name }}</td>
                         <td>{{ $company->email }}</td>
                         <td>{{ $company->website }}</td>

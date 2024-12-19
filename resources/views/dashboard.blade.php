@@ -1,17 +1,16 @@
 <x-app-layout>
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot> --}}
+    <div class="container mt-5">
+        <h1>Welcome, {{ Auth::user()->name }}!</h1>
+        <p class="lead">Select a database to manage:</p>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+        <div class="list-group">
+            <a href="{{ route('companies.index') }}" class="list-group-item list-group-item-action">
+                Companies
+            </a>
+            <a href="{{ route('employees.index') }}" class="list-group-item list-group-item-action">
+                Employees
+            </a>
         </div>
     </div>
 </x-app-layout>
+

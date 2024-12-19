@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\File;
 
 class CompanyFactory extends Factory
 {
@@ -13,7 +14,7 @@ class CompanyFactory extends Factory
      */
     public function definition()
     {
-        // Generate a company name without forcing "Ltd." every time
+
         $companyName = $this->faker->company;
 
         // Generate a domain name based on the company name
@@ -26,10 +27,13 @@ class CompanyFactory extends Factory
         $emailPrefix = $this->faker->randomElement($emailPrefixes);
         $email = $emailPrefix . '@' . $domain;
 
+        $logos = File::files(public_path('storage/logos/'));
+        $randomLogo = $logos ? 'logos/' . $logos[array_rand($logos)]->getFilename() : null;
+
         return [
             'name' => $companyName,
             'email' => $email,
-            'logo' => null, // Optional: Add logic to generate or point to placeholder logos
+            'logo' => $randomLogo,
             'website' => 'https://' . $domain,
         ];
     }
